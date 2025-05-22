@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import type { definitions } from "../generated/opentofu-api.js";
-import { ProviderWithLatestVersion, RegistryClient } from "../registry/index.js";
+import { type ProviderWithLatestVersion, RegistryClient } from "../registry/index.js";
 
 export async function setupRegistry(server: McpServer) {
   const client = new RegistryClient();

@@ -7,9 +7,7 @@
   "bin": {
     "opentofu-mcp-server": "dist/index.js"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node --esm src/index.ts",
@@ -21,14 +19,7 @@
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "pnpm build"
   },
-  "keywords": [
-    "opentofu",
-    "mcp",
-    "registry",
-    "model-context-protocol",
-    "claude",
-    "chatgpt"
-  ],
+  "keywords": ["opentofu", "mcp", "registry", "model-context-protocol", "claude", "chatgpt"],
   "author": "OpenTofu Contributors",
   "license": "MPL-2.0",
   "repository": {
