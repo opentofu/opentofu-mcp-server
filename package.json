@@ -1,5 +1,5 @@
 {
-  "name": "opentofu-mcp-server",
+  "name": "@opentofu/opentofu-mcp-server",
   "version": "0.1.0",
   "description": "OpenTofu MCP Server for accessing the OpenTofu Registry",
   "main": "dist/index.js",
