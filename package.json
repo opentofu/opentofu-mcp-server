@@ -1,5 +1,5 @@
 {
-  "name": "@opentofu/opentofu-mcp-server",
+  "name": "opentofu-mcp-server",
   "version": "0.1.0",
   "description": "OpenTofu MCP Server for accessing the OpenTofu Registry",
   "main": "dist/index.js",
@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/opentofu/opentofu-mcp-server#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
   "engines": {

@@ -19,7 +19,7 @@ You can use this MCP server with any AI assistant that supports the Model Contex
 The easiest way to use the OpenTofu MCP server is with npx:
 
 ```bash
-npx --registry=https://npm.pkg.github.com @opentofu/opentofu-mcp-server
+npx opentofu-mcp-server
 ```
 
 This will start the MCP server, which can be used with Claude, ChatGPT, or other MCP-compatible assistants.
@@ -27,7 +27,7 @@ This will start the MCP server, which can be used with Claude, ChatGPT, or other
 You can also install it globally:
 
 ```bash
-npm install -g --registry=https://npm.pkg.github.com @opentofu/opentofu-mcp-server
+npm install -g opentofu-mcp-server
 opentofu-mcp-server
 ```
 
@@ -36,7 +36,7 @@ opentofu-mcp-server
 For Claude Code users, you can add this server to your session with:
 
 ```bash
-claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server --registry=https://npm.pkg.github.com
+claude mcp add opentofu-mcp-server
 ```
 
 ### Available Tools
