@@ -18,6 +18,15 @@ jobs:
         with:
           version: 8
           run_install: false
+          
+      - name: Update package version from release
+        run: |
+          # Extract version from GitHub release tag (without 'v' prefix if present)
+          RELEASE_VERSION=${GITHUB_REF#refs/tags/}
+          RELEASE_VERSION=${RELEASE_VERSION#v}
+          
+          # Update package.json version
+          npm version $RELEASE_VERSION --no-git-tag-version
 
       - name: Get pnpm store directory
         shell: bash

@@ -1,13 +1,15 @@
 {
   "name": "@opentofu/opentofu-mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenTofu MCP Server for accessing the OpenTofu Registry",
   "main": "dist/index.js",
   "type": "module",
-  "bin": "dist/index.js",
+  "bin": {
+    "opentofu-mcp-server": "dist/index.js"
+  },
   "files": ["dist"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && chmod +x dist/index.js",
     "dev": "ts-node --esm src/index.ts",
     "start": "node dist/index.js",
     "generate-api": "openapi-typescript https://api.opentofu.org/openapi.yml --output src/generated/opentofu-api.ts && tsc --declaration --emitDeclarationOnly src/generated/opentofu-api.ts",
