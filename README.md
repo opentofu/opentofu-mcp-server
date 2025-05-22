@@ -10,11 +10,11 @@ A Model Context Protocol (MCP) server for accessing the OpenTofu Registry. This 
 - Retrieve comprehensive OpenTofu configuration examples
 - MCP-compatible interface for AI assistants
 
-## Usage
+## Installation
 
 You can use this MCP server with any AI assistant that supports the Model Context Protocol.
 
-### Using with npx
+### Basic Usage
 
 The easiest way to use the OpenTofu MCP server is with npx:
 
@@ -24,6 +24,8 @@ npx @opentofu/opentofu-mcp-server
 
 This will start the MCP server, which can be used with Claude, ChatGPT, or other MCP-compatible assistants.
 
+### Global Installation
+
 You can also install it globally:
 
 ```bash
@@ -31,12 +33,29 @@ npm install -g @opentofu/opentofu-mcp-server
 opentofu-mcp-server
 ```
 
+### AI Tool Integration
+
+Here's how to integrate with popular AI tools:
+
+#### MCP Configuration (Generic)
+
+```json
+{
+  "mcpServers": {
+    "opentofu": {
+      "command": "npx",
+      "args": ["-y", "@opentofu/opentofu-mcp-server"]
+    }
+  }
+}
+```
+
 ### Using with Claude Code
 
 For Claude Code users, you can add this server to your session with:
 
 ```bash
-claude mcp add @opentofu/opentofu-mcp-server
+claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server
 ```
 
 ### Available Tools
