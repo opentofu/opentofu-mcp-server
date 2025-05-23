@@ -13,7 +13,7 @@
   "scripts": {
     "build": "tsc && chmod +x dist/local.js",
     "start": "node dist/local.js",
-    "generate-api": "openapi-typescript https://api.opentofu.org/openapi.yml --output src/generated/opentofu-api.ts && tsc --declaration --emitDeclarationOnly src/generated/opentofu-api.ts",
+    "generate-api": "openapi-typescript https://api.opentofu.org/openapi.yml --output src/generated/opentofu-api.ts",
     "test": "vitest",
     "lint": "biome check .",
     "format": "biome format . --write",

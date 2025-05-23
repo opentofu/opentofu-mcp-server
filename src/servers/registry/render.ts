@@ -1,5 +1,7 @@
-import type { definitions } from "../../generated/opentofu-api.js";
+import type { components } from "../../generated/opentofu-api.js";
 import type { ProviderWithLatestVersion } from "../../registry/index.js";
+
+type apiDefinition = components["schemas"];
 
 export function renderProviderDetails(name: string, namespace: string, provider: ProviderWithLatestVersion): string {
   let formattedResponse = `## Provider: ${provider.addr.display}\n
@@ -26,7 +28,7 @@ ${provider.link ? `\n**Documentation**: ${provider.link}\n` : ""}`;
   return formattedResponse;
 }
 
-export function renderModuleDetails(module: definitions["Module"]): string {
+export function renderModuleDetails(module: apiDefinition["Module"]): string {
   return `## Module: ${module.addr.display}\n
 ${module.description}
 
@@ -42,7 +44,7 @@ function truncateString(str: string | undefined, maxLength = 50): string | undef
   return `${str.slice(0, maxLength - 3)}...`;
 }
 
-export function renderResourcesSection(resources: definitions["ProviderDocItem"][], providerName: string, namespace: string): string {
+export function renderResourcesSection(resources: apiDefinition["ProviderDocItem"][], providerName: string, namespace: string): string {
   if (!resources?.length) return "";
   return `
 ### Resources (${resources.length})
@@ -54,7 +56,7 @@ ${resources.map((resource) => `- ${resource.name}: ${truncateString(resource.des
 `.trim();
 }
 
-export function renderDataSourcesSection(datasources: definitions["ProviderDocItem"][], providerName: string, namespace: string): string {
+export function renderDataSourcesSection(datasources: apiDefinition["ProviderDocItem"][], providerName: string, namespace: string): string {
   if (!datasources?.length) return "";
   return `
 ### Data Sources (${datasources.length})
@@ -66,7 +68,7 @@ ${datasources.map((datasource) => `- ${datasource.name}: ${truncateString(dataso
 `.trim();
 }
 
-export function renderSearchResults(r: definitions["SearchResultItem"]): string {
+export function renderSearchResults(r: apiDefinition["SearchResultItem"]): string {
   let result = `- ${r.title} ${r.description.trim()} (${r.type})`;
   result += ` (latest version: ${r.version})`;
   switch (r.type) {

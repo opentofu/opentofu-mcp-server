@@ -10,8 +10,9 @@
     "rootDir": "src",
     "declaration": true,
     "sourceMap": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"],
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", ".wrangler", "wrangler.toml"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", ".wrangler", "wrangler.toml",],
 }

@@ -14,35 +14,66 @@ Available as both a local Node.js server and a remote Cloudflare Worker deployme
 
 ## Installation
 
-You can use this MCP server with any AI assistant that supports the Model Context Protocol.
+You can use this MCP server with any AI assistant that supports the Model Context Protocol. Choose between the hosted service or local installation:
+
+### Hosted Service (Recommended)
+
+The easiest way to get started is to use our hosted service at `mcp.opentofu.org`. Benefits include:
+
+- ✅ No local installation required
+- ✅ Always up-to-date with the latest OpenTofu Registry data
+- ✅ Globally distributed via Cloudflare Workers
+- ✅ High availability and performance
+
+#### Claude Code
+
+Add the hosted OpenTofu MCP server to Claude Code:
+
+```bash
+claude mcp add opentofu -t sse https://mcp.opentofu.org/sse
+```
+
+#### Generic MCP Configuration
+
+```json
+{
+  "mcpServers": {
+    "opentofu": {
+      "transport": "sse",
+      "endpoint": "https://mcp.opentofu.org/sse"
+    }
+  }
+}
+```
 
 ### Local Server
 
 #### Basic Usage
 
-The easiest way to use the OpenTofu MCP server is with npx:
+You can also run the server locally with npx:
 
 ```bash
 npx @opentofu/opentofu-mcp-server
 ```
 
-This will start the MCP server, which can be used with Claude, ChatGPT, or other MCP-compatible assistants.
-
 #### Global Installation
 
-You can also install it globally:
+Install globally for repeated use:
 
 ```bash
 npm install -g @opentofu/opentofu-mcp-server
 opentofu-mcp-server
 ```
 
+#### Claude Code (Local)
 
-### AI Tool Integration
+Add the local server to Claude Code:
 
-Here's how to integrate with popular AI tools:
+```bash
+claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server
+```
 
-#### MCP Configuration (Generic)
+#### Generic MCP Configuration (Local)
 
 ```json
 {
@@ -53,14 +84,6 @@ Here's how to integrate with popular AI tools:
     }
   }
 }
-```
-
-### Using with Claude Code
-
-For Claude Code users, you can add this server to your session with:
-
-```bash
-claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server
 ```
 
 ### Available Tools

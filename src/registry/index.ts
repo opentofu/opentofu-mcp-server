@@ -1,11 +1,13 @@
 import semver from "semver";
-import type { definitions, operations, paths } from "../generated/opentofu-api.js";
+import type { operations, components } from "../generated/opentofu-api.js";
 import { PACKAGE_NAME, PACKAGE_VERSION } from "../utils.js";
+
+type apiDefinition = components["schemas"];
 
 const API_BASE_URL = "https://api.opentofu.org";
 
-export type ProviderWithLatestVersion = definitions["Provider"] & {
-  latestVersion?: definitions["ProviderVersion"];
+export type ProviderWithLatestVersion = apiDefinition["Provider"] & {
+  latestVersion?: apiDefinition["ProviderVersion"];
 };
 
 export type DocType = operations["GetProviderDocItem"]["parameters"]["path"]["kind"];
@@ -42,7 +44,7 @@ export class RegistryClient {
     return (responseType === "json" ? response.json() : response.text()) as Promise<T>;
   }
 
-  private getLatestVersion(versions: definitions["ProviderVersionDescriptor"][]): string | undefined {
+  private getLatestVersion(versions: apiDefinition["ProviderVersionDescriptor"][]): string | undefined {
     if (!versions || versions.length === 0) {
       return undefined;
     }
@@ -66,13 +68,13 @@ export class RegistryClient {
   }
 
   private async getLatestProviderVersion(namespace: string, name: string): Promise<string | undefined> {
-    const provider = await this.fetchFromApi<definitions["Provider"]>(`/registry/docs/providers/${namespace}/${name}/index.json`);
+    const provider = await this.fetchFromApi<apiDefinition["Provider"]>(`/registry/docs/providers/${namespace}/${name}/index.json`);
     return this.getLatestVersion(provider.versions);
   }
 
-  async search(query: string, type?: string): Promise<definitions["SearchResultItem"][]> {
+  async search(query: string, type?: string): Promise<apiDefinition["SearchResultItem"][]> {
     const params: Record<string, string> = { q: query };
-    const response = await this.fetchFromApi<definitions["SearchResultItem"][]>("/registry/docs/search", params);
+    const response = await this.fetchFromApi<apiDefinition["SearchResultItem"][]>("/registry/docs/search", params);
 
     let results = response;
     if (type && type !== "all") {
@@ -81,13 +83,13 @@ export class RegistryClient {
     return results;
   }
 
-  async getProviderList(): Promise<definitions["ProviderList"]> {
-    return await this.fetchFromApi<definitions["ProviderList"]>("/registry/docs/providers/index.json");
+  async getProviderList(): Promise<apiDefinition["ProviderList"]> {
+    return await this.fetchFromApi<apiDefinition["ProviderList"]>("/registry/docs/providers/index.json");
   }
 
   async getProviderDetails(namespace: string, name: string): Promise<ProviderWithLatestVersion> {
     const path = `/registry/docs/providers/${namespace}/${name}/index.json`;
-    const provider = await this.fetchFromApi<definitions["Provider"]>(path);
+    const provider = await this.fetchFromApi<apiDefinition["Provider"]>(path);
 
     const enhancedProvider: ProviderWithLatestVersion = { ...provider };
 
@@ -95,20 +97,20 @@ export class RegistryClient {
       const latestVersion = this.getLatestVersion(provider.versions);
 
       const versionPath = `/registry/docs/providers/${namespace}/${name}/${latestVersion}/index.json`;
-      const versionDetails = await this.fetchFromApi<definitions["ProviderVersion"]>(versionPath);
+      const versionDetails = await this.fetchFromApi<apiDefinition["ProviderVersion"]>(versionPath);
       enhancedProvider.latestVersion = versionDetails;
     }
 
     return enhancedProvider;
   }
 
-  async getModuleList(): Promise<definitions["ModuleList"]> {
-    return await this.fetchFromApi<definitions["ModuleList"]>("/registry/docs/modules/index.json");
+  async getModuleList(): Promise<apiDefinition["ModuleList"]> {
+    return await this.fetchFromApi<apiDefinition["ModuleList"]>("/registry/docs/modules/index.json");
   }
 
-  async getModuleDetails(namespace: string, name: string, target: string): Promise<definitions["Module"]> {
+  async getModuleDetails(namespace: string, name: string, target: string): Promise<apiDefinition["Module"]> {
     const path = `/registry/docs/modules/${namespace}/${name}/${target}/index.json`;
-    return await this.fetchFromApi<definitions["Module"]>(path);
+    return await this.fetchFromApi<apiDefinition["Module"]>(path);
   }
 
   async getResourceDocs(namespace: string, name: string, target: string, version?: string): Promise<string> {
