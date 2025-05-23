@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
-import { setupRegistry } from "./servers/registry/index.js";
+import { serverInstructions, setupRegistry } from "./servers/registry/index.js";
 import { getPackageInfo } from "./utils.js";
 
 const { name, version } = getPackageInfo();
@@ -9,6 +9,7 @@ export class OpenTofuMCP extends McpAgent<Env> {
   server = new McpServer({
     name: name,
     version: version,
+    instructions: serverInstructions,
   });
 
   async init() {

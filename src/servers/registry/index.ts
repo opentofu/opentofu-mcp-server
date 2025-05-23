@@ -34,19 +34,7 @@ const dataSourceDocsSchema = {
   version: z.string().optional().describe("Provider version (e.g., 'v4.0.0'). If not specified, latest version will be used"),
 };
 
-export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch) {
-  const client = new RegistryClient(API_BASE_URL, f);
-
-  server.resource(
-    "opentofu-registry-info",
-    "opentofu:registry-info",
-
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          text: `The OpenTofu Registry is a public index of providers, modules, resources, and data sources for OpenTofu and Terraform. 
-
+export const serverInstructions = `The OpenTofu Registry is a public index of providers, modules, resources, and data sources for OpenTofu and Terraform. 
 You can:
 - **Search** for providers, modules, resources, and data sources using the \`search-opentofu-registry\` tool.
 - **Get detailed information** about a provider or module using \`get-provider-details\` or \`get-module-details\`.
@@ -58,7 +46,20 @@ You can:
 - For resources and data sources, use the short name (e.g., \`s3_bucket\`, \`instance\`, \`ami\`).
 
 This MCP server is designed to work with OpenTofu (A fork of HashiCorp Terraform) and provides access to the OpenTofu Registry.
-For more details, use the search and info tools above to explore the registry.`,
+For more details, use the search and info tools above to explore the registry.`;
+
+export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch) {
+  const client = new RegistryClient(API_BASE_URL, f);
+
+  server.resource(
+    "opentofu-registry-info",
+    "opentofu:registry-info",
+
+    async (uri) => ({
+      contents: [
+        {
+          uri: uri.href,
+          text: serverInstructions,
         },
       ],
     }),
