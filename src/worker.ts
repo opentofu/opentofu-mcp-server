@@ -12,7 +12,8 @@ export class OpenTofuMCP extends McpAgent<Env> {
   });
 
   async init() {
-    await setupRegistry(this.server, this.env.REGISTRY_API.fetch);
+    console.log("fetch method", this.env.REGISTRY_API.fetch);
+    await setupRegistry(this.server, this.env.REGISTRY_API.fetch.bind(this.env.REGISTRY_API));
   }
 }
 
