@@ -1,6 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { RegistryClient } from "../../registry/index.js";
+import { API_BASE_URL, RegistryClient } from "../../registry/index.js";
 import { renderModuleDetails, renderProviderDetails, renderSearchResults } from "./render.js";
 
 // Schema definitions
@@ -34,8 +34,8 @@ const dataSourceDocsSchema = {
   version: z.string().optional().describe("Provider version (e.g., 'v4.0.0'). If not specified, latest version will be used"),
 };
 
-export async function setupRegistry(server: McpServer) {
-  const client = new RegistryClient();
+export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch) {
+  const client = new RegistryClient(API_BASE_URL, f);
 
   server.resource(
     "opentofu-registry-info",

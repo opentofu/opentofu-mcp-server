@@ -5,19 +5,19 @@ import { getPackageInfo } from "./utils.js";
 
 const { name, version } = getPackageInfo();
 
-export class OpenTofuMCP extends McpAgent {
+export class OpenTofuMCP extends McpAgent<Env> {
   server = new McpServer({
     name: name,
     version: version,
   });
 
   async init() {
-    await setupRegistry(this.server);
+    await setupRegistry(this.server, this.env.REGISTRY_API.fetch);
   }
 }
 
 export default {
-  async fetch(request: Request, env: unknown, ctx: unknown): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === "/sse" || url.pathname === "/sse/message") {

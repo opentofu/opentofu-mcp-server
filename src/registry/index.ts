@@ -4,7 +4,7 @@ import { PACKAGE_NAME, PACKAGE_VERSION } from "../utils.js";
 
 type apiDefinition = components["schemas"];
 
-const API_BASE_URL = "https://api.opentofu.org";
+export const API_BASE_URL = "https://api.opentofu.org";
 
 export type ProviderWithLatestVersion = apiDefinition["Provider"] & {
   latestVersion?: apiDefinition["ProviderVersion"];
@@ -15,9 +15,11 @@ export type DocType = operations["GetProviderDocItem"]["parameters"]["path"]["ki
 export class RegistryClient {
   private apiBaseUrl: string;
   private userAgent = `${PACKAGE_NAME}/${PACKAGE_VERSION}`;
+  private fetch: typeof globalThis.fetch;
 
-  constructor(apiBaseUrl: string = API_BASE_URL) {
+  constructor(apiBaseUrl: string = API_BASE_URL, fetch: typeof globalThis.fetch = globalThis.fetch) {
     this.apiBaseUrl = apiBaseUrl;
+    this.fetch = fetch;
   }
 
   private async fetchFromApi<T>(path: string, params: Record<string, string> = {}, responseType: "json" | "text" = "json"): Promise<T> {
@@ -31,7 +33,7 @@ export class RegistryClient {
     const queryString = queryParams.toString();
     const url = `${this.apiBaseUrl}${String(path)}${queryString ? `?${queryString}` : ""}`;
 
-    const response = await fetch(url, {
+    const response = await this.fetch(url, {
       headers: {
         "User-Agent": this.userAgent,
       },

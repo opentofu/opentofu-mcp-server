@@ -10,6 +10,12 @@
       "custom_domain": true
     }
   ],
+  "services": [
+    {
+      "binding": "REGISTRY_API",
+      "service": "registry-ui-search"
+    }
+  ],
   "durable_objects": {
     "bindings": [
       {
