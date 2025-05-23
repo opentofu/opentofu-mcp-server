@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { setupRegistry } from "./servers/registry.js";
-
-const SERVER_VERSION = "0.1.0";
+import { setupRegistry } from "./servers/registry/index.js";
+import { getPackageInfo } from "./utils.js";
 
 async function main() {
   try {
+    const { name, version } = getPackageInfo();
     const server = new McpServer({
-      name: "opentofu",
-      version: SERVER_VERSION,
+      name: name,
+      version: version,
       description: "OpenTofu MCP Server for registry access and command execution",
     });
 

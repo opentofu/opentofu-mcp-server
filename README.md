@@ -2,6 +2,8 @@
 
 A Model Context Protocol (MCP) server for accessing the OpenTofu Registry. This server allows language model assistants to search for and retrieve information about OpenTofu providers, modules, resources, and data sources.
 
+Available as both a local Node.js server and a remote Cloudflare Worker deployment.
+
 ## Features
 
 - Search the OpenTofu Registry for providers, modules, resources, and data sources
@@ -14,7 +16,9 @@ A Model Context Protocol (MCP) server for accessing the OpenTofu Registry. This 
 
 You can use this MCP server with any AI assistant that supports the Model Context Protocol.
 
-### Basic Usage
+### Local Server
+
+#### Basic Usage
 
 The easiest way to use the OpenTofu MCP server is with npx:
 
@@ -24,7 +28,7 @@ npx @opentofu/opentofu-mcp-server
 
 This will start the MCP server, which can be used with Claude, ChatGPT, or other MCP-compatible assistants.
 
-### Global Installation
+#### Global Installation
 
 You can also install it globally:
 
@@ -32,6 +36,7 @@ You can also install it globally:
 npm install -g @opentofu/opentofu-mcp-server
 opentofu-mcp-server
 ```
+
 
 ### AI Tool Integration
 

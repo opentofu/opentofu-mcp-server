@@ -21,6 +21,6 @@
     }
   },
   "files": {
-    "ignore": ["node_modules", "dist", "src/generated/**"]
+    "ignore": ["node_modules", "dist", "src/generated/**", "**/*.json", ".wrangler/**"]
   }
 }

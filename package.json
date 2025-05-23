@@ -2,24 +2,34 @@
   "name": "@opentofu/opentofu-mcp-server",
   "version": "0.1.5",
   "description": "OpenTofu MCP Server for accessing the OpenTofu Registry",
-  "main": "dist/index.js",
+  "main": "dist/local.js",
   "type": "module",
   "bin": {
-    "opentofu-mcp-server": "dist/index.js"
+    "opentofu-mcp-server": "dist/local.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc && chmod +x dist/index.js",
-    "dev": "ts-node --esm src/index.ts",
-    "start": "node dist/index.js",
+    "build": "tsc && chmod +x dist/local.js",
+    "start": "node dist/local.js",
     "generate-api": "openapi-typescript https://api.opentofu.org/openapi.yml --output src/generated/opentofu-api.ts && tsc --declaration --emitDeclarationOnly src/generated/opentofu-api.ts",
     "test": "vitest",
     "lint": "biome check .",
     "format": "biome format . --write",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "deploy": "wrangler deploy",
+    "dev:worker": "wrangler dev"
   },
-  "keywords": ["opentofu", "mcp", "registry", "model-context-protocol", "claude", "chatgpt"],
+  "keywords": [
+    "opentofu",
+    "mcp",
+    "registry",
+    "model-context-protocol",
+    "claude",
+    "chatgpt"
+  ],
   "author": "OpenTofu Contributors",
   "license": "MPL-2.0",
   "repository": {
@@ -38,16 +48,19 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "latest",
+    "agents": "latest",
     "semver": "^7.7.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@cloudflare/workers-types": "^4.20250119.0",
     "@types/node": "^22.15.21",
     "@types/semver": "^7.7.0",
     "openapi-typescript": "^5.4.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.0",
-    "vitest": "^3.1.4"
+    "vitest": "^3.1.4",
+    "wrangler": "^3.103.5"
   }
 }

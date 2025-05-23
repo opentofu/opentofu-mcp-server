@@ -36,3 +36,7 @@ coverage/
 # Cache
 .cache/
 .npm/
+
+# Cloudflare
+.wrangler/
+.dev.vars
