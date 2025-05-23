@@ -33,6 +33,23 @@ Add the hosted OpenTofu MCP server to Claude Code:
 claude mcp add opentofu -t sse https://mcp.opentofu.org/sse
 ```
 
+#### Cursor
+
+Add the hosted OpenTofu MCP server to Cursor:
+
+Cursor expects `url` instead of `endpoint` in order to properly set up the MCP server.
+
+```json
+{
+  "mcpServers": {
+    "opentofu": {
+      "transport": "sse",
+      "url": "https://mcp.opentofu.org/sse"
+    }
+  }
+}
+```
+
 #### Generic MCP Configuration
 
 ```json
