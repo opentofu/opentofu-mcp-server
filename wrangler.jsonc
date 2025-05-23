@@ -6,7 +6,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "routes": [
     {
-      "pattern": "mcp.opentofu.org/*",
+      "pattern": "mcp.opentofu.org",
       "custom_domain": true
     }
   ],

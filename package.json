@@ -61,6 +61,6 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.0",
     "vitest": "^3.1.4",
-    "wrangler": "^3.103.5"
+    "wrangler": "^4.16.1"
   }
 }
