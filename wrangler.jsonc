@@ -1,8 +1,15 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "opentofu-mcp-server",
   "main": "src/worker.ts",
   "compatibility_date": "2025-03-10",
   "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    {
+      "pattern": "mcp.opentofu.org/*",
+      "custom_domain": true
+    }
+  ],
   "durable_objects": {
     "bindings": [
       {
