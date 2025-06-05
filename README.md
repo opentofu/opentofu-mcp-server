@@ -35,20 +35,7 @@ claude mcp add opentofu -t sse https://mcp.opentofu.org/sse
 
 #### Cursor
 
-Add the hosted OpenTofu MCP server to Cursor:
-
-Cursor expects `url` instead of `endpoint` in order to properly set up the MCP server.
-
-```json
-{
-  "mcpServers": {
-    "opentofu": {
-      "transport": "sse",
-      "url": "https://mcp.opentofu.org/sse"
-    }
-  }
-}
-```
+[Automatically install to Cursor in one click](https://cursor.com/install-mcp?name=opentofu&config=eyJ0cmFuc3BvcnQiOiJzc2UiLCJ1cmwiOiJodHRwczovL21jcC5vcGVudG9mdS5vcmcvc3NlIn0%3D)
 
 #### Generic MCP Configuration
 
