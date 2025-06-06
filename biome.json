@@ -21,6 +21,6 @@
     }
   },
   "files": {
-    "ignore": ["node_modules", "dist", "src/generated/**", "**/*.json", ".wrangler/**"]
+    "ignore": ["node_modules", "dist", "src/generated/**", "**/*.json", ".wrangler/**", "worker-configuration.d.ts", "biome.json"]
   }
 }

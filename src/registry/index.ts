@@ -1,5 +1,5 @@
 import semver from "semver";
-import type { operations, components } from "../generated/opentofu-api.js";
+import type { components, operations } from "../generated/opentofu-api.js";
 import { PACKAGE_NAME, PACKAGE_VERSION } from "../utils.js";
 
 type apiDefinition = components["schemas"];
