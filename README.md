@@ -33,9 +33,26 @@ Add the hosted OpenTofu MCP server to Claude Code:
 claude mcp add opentofu -t sse https://mcp.opentofu.org/sse
 ```
 
-#### Cursor
+#### Cursor / VS Code
 
 [Automatically install to Cursor in one click](https://cursor.com/install-mcp?name=opentofu&config=eyJ0cmFuc3BvcnQiOiJzc2UiLCJ1cmwiOiJodHRwczovL21jcC5vcGVudG9mdS5vcmcvc3NlIn0%3D)
+
+Add this to your `settings.json`.
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "opentofu": {
+        "type": "sse",
+        "url": "https://mcp.opentofu.org/sse"
+      },
+    }
+  }
+}
+```
+
+You do not need to define any inputs.
 
 #### Generic MCP Configuration
 
