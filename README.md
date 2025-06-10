@@ -4,6 +4,10 @@ A Model Context Protocol (MCP) server for accessing the OpenTofu Registry. This 
 
 Available as both a local Node.js server and a remote Cloudflare Worker deployment.
 
+<a href="https://glama.ai/mcp/servers/@opentofu/opentofu-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@opentofu/opentofu-mcp-server/badge" alt="OpenTofu Server MCP server" />
+</a>
+
 ## Features
 
 - Search the OpenTofu Registry for providers, modules, resources, and data sources
