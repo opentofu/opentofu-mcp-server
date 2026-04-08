@@ -1,22 +1,18 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { serverInstructions as instructions, setupRegistry } from "./servers/registry/index.js";
-import { getPackageInfo } from "./utils.js";
-
-const { name, version } = getPackageInfo();
+import { PACKAGE_NAME, PACKAGE_VERSION } from "./utils.js";
 
 export class OpenTofuMCP extends McpAgent<Env> {
-  // @ts-expect-error - SDK version mismatch with agents package, this can be removed once https://github.com/cloudflare/agents/pull/752 is in place.
   server = new McpServer(
     {
-      name: name,
-      version: version,
+      name: PACKAGE_NAME,
+      version: PACKAGE_VERSION,
     },
     { instructions },
   );
 
   async init() {
-    console.log("fetch method", this.env.REGISTRY_API.fetch);
     await setupRegistry(this.server, this.env.REGISTRY_API.fetch.bind(this.env.REGISTRY_API));
   }
 }
