@@ -51,25 +51,22 @@ For more details, use the search and info tools above to explore the registry.`;
 export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch) {
   const client = new RegistryClient(API_BASE_URL, f);
 
-  server.resource(
-    "opentofu-registry-info",
-    "opentofu:registry-info",
-
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          text: serverInstructions,
-        },
-      ],
-    }),
-  );
+  server.registerResource("opentofu-registry-info", "opentofu:registry-info", {}, async (uri) => ({
+    contents: [
+      {
+        uri: uri.href,
+        text: serverInstructions,
+      },
+    ],
+  }));
 
   // Register all tools
-  server.tool(
+  server.registerTool(
     "search-opentofu-registry",
-    "Search the OpenTofu Registry to find providers, modules, resources, and data sources. Use simple terms without prefixes like 'terraform-provider-' or 'terraform-module-'.",
-    searchSchema,
+    {
+      description: "Search the OpenTofu Registry to find providers, modules, resources, and data sources. Use simple terms without prefixes like 'terraform-provider-' or 'terraform-module-'.",
+      inputSchema: searchSchema,
+    },
     async (params) => {
       try {
         const results = await client.search(params.query, params.type);
@@ -84,10 +81,12 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get-provider-details",
-    "Get detailed information about a specific OpenTofu provider by namespace and name. Do NOT include 'terraform-provider-' prefix in the name.",
-    providerDetailsSchema,
+    {
+      description: "Get detailed information about a specific OpenTofu provider by namespace and name. Do NOT include 'terraform-provider-' prefix in the name.",
+      inputSchema: providerDetailsSchema,
+    },
     async (params) => {
       try {
         const provider = await client.getProviderDetails(params.namespace, params.name);
@@ -99,10 +98,12 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get-module-details",
-    "Get detailed information about a specific OpenTofu module by namespace, name, and target. Use the simple module name, NOT the full repository name.",
-    moduleDetailsSchema,
+    {
+      description: "Get detailed information about a specific OpenTofu module by namespace, name, and target. Use the simple module name, NOT the full repository name.",
+      inputSchema: moduleDetailsSchema,
+    },
     async (params) => {
       try {
         const module = await client.getModuleDetails(params.namespace, params.name, params.target);
@@ -114,20 +115,29 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
     },
   );
 
-  server.tool("get-resource-docs", "Get detailed documentation for a specific OpenTofu resource by provider namespace, provider name, and resource name.", resourceDocsSchema, async (params) => {
-    try {
-      const resourceDocs = await client.getResourceDocs(params.namespace, params.name, params.resource, params.version);
-      return textResult(resourceDocs);
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "Resource documentation not found";
-      return textResult(`Failed to get documentation for resource ${params.name}_${params.resource}: ${errorMessage}`);
-    }
-  });
+  server.registerTool(
+    "get-resource-docs",
+    {
+      description: "Get detailed documentation for a specific OpenTofu resource by provider namespace, provider name, and resource name.",
+      inputSchema: resourceDocsSchema,
+    },
+    async (params) => {
+      try {
+        const resourceDocs = await client.getResourceDocs(params.namespace, params.name, params.resource, params.version);
+        return textResult(resourceDocs);
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "Resource documentation not found";
+        return textResult(`Failed to get documentation for resource ${params.name}_${params.resource}: ${errorMessage}`);
+      }
+    },
+  );
 
-  server.tool(
+  server.registerTool(
     "get-datasource-docs",
-    "Get detailed documentation for a specific OpenTofu data source by provider namespace, provider name, and data source name.",
-    dataSourceDocsSchema,
+    {
+      description: "Get detailed documentation for a specific OpenTofu data source by provider namespace, provider name, and data source name.",
+      inputSchema: dataSourceDocsSchema,
+    },
     async (params) => {
       try {
         const dataSourceDocs = await client.getDataSourceDocs(params.namespace, params.name, params.dataSource, params.version);
