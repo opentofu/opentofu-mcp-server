@@ -30,12 +30,12 @@ The easiest way to get started is to use our hosted service at `mcp.opentofu.org
 Add the hosted OpenTofu MCP server to Claude Code:
 
 ```bash
-claude mcp add opentofu -t sse https://mcp.opentofu.org/sse
+claude mcp add opentofu -t streamable-http https://mcp.opentofu.org/mcp
 ```
 
 #### Cursor / VS Code
 
-[Automatically install to Cursor in one click](https://cursor.com/install-mcp?name=opentofu&config=eyJ0cmFuc3BvcnQiOiJzc2UiLCJ1cmwiOiJodHRwczovL21jcC5vcGVudG9mdS5vcmcvc3NlIn0%3D)
+[Automatically install to Cursor in one click](https://cursor.com/install-mcp?name=opentofu&config=eyJ0cmFuc3BvcnQiOiJzdHJlYW1hYmxlLWh0dHAiLCJ1cmwiOiJodHRwczovL21jcC5vcGVudG9mdS5vcmcvbWNwIn0%3D)
 
 Add this to your `settings.json`.
 
@@ -44,9 +44,9 @@ Add this to your `settings.json`.
   "mcp": {
     "servers": {
       "opentofu": {
-        "type": "sse",
-        "url": "https://mcp.opentofu.org/sse"
-      },
+        "type": "streamable-http",
+        "url": "https://mcp.opentofu.org/mcp"
+      }
     }
   }
 }
@@ -60,8 +60,8 @@ You do not need to define any inputs.
 {
   "mcpServers": {
     "opentofu": {
-      "transport": "sse",
-      "endpoint": "https://mcp.opentofu.org/sse"
+      "transport": "streamable-http",
+      "url": "https://mcp.opentofu.org/mcp"
     }
   }
 }
