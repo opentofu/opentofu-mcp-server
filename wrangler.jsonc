@@ -15,19 +15,5 @@
       "binding": "REGISTRY_API",
       "service": "registry-ui-search"
     }
-  ],
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "MCP_OBJECT",
-        "class_name": "OpenTofuMCP"
-      }
-    ]
-  },
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_sqlite_classes": ["OpenTofuMCP"]
-    }
   ]
 }
