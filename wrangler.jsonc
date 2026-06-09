@@ -15,5 +15,15 @@
       "binding": "REGISTRY_API",
       "service": "registry-ui-search"
     }
+  ],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["OpenTofuMCP"]
+    },
+    {
+      "tag": "v2",
+      "deleted_classes": ["OpenTofuMCP"]
+    }
   ]
 }
