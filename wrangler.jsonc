@@ -33,7 +33,7 @@
       "destinations": ["worker-logs"]
     },
     "traces": {
-      "enabled": false,
+      "enabled": true,
       "destinations": ["worker-traces"]
     }
   }
