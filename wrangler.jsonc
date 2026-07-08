@@ -25,5 +25,16 @@
       "tag": "v2",
       "deleted_classes": ["OpenTofuMCP"]
     }
-  ]
+  ],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "destinations": ["worker-logs"]
+    },
+    "traces": {
+      "enabled": false,
+      "destinations": ["worker-traces"]
+    }
+  }
 }
