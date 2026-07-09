@@ -4,667 +4,1036 @@
  */
 
 export interface paths {
-  "/registry/docs/modules/index.json": {
-    /** Returns a list of all modules */
-    get: operations["GetModuleList"];
-  };
-  "/registry/docs/modules/{namespace}/{name}/{target}/index.json": {
-    /** Returns a list of all versions of a module with metadata */
-    get: operations["GetModule"];
-  };
-  "/registry/docs/modules/{namespace}/{name}/{target}/{version}/index.json": {
-    /** Returns the details of a specific module version */
-    get: operations["GetModuleVersion"];
-  };
-  "/registry/docs/modules/{namespace}/{name}/{target}/{version}/README.md": {
-    /** Returns the readme of a module */
-    get: operations["GetModuleReadme"];
-  };
-  "/registry/docs/modules/{namespace}/{name}/{target}/{version}/modules/{submodule}/README.md": {
-    /** Returns the readme of a submodule */
-    get: operations["GetSubmoduleReadme"];
-  };
-  "/registry/docs/modules/{namespace}/{name}/{target}/{version}/examples/{example}/README.md": {
-    /** Returns the readme of a module example */
-    get: operations["GetModuleExampleReadme"];
-  };
-  "/registry/docs/providers/index.json": {
-    /** Returns a list of all providers */
-    get: operations["GetProviderList"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/index.json": {
-    /** Returns a list of all versions of a provider with metadata */
-    get: operations["GetProvider"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/{version}/index.json": {
-    /** Returns the details of a specific provider version */
-    get: operations["GetProviderVersion"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/{version}/index.md": {
-    /** Returns a root provider document if it exists */
-    get: operations["GetProviderDoc"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/{version}/{kind}s/{document}.md": {
-    /** Returns a provider document */
-    get: operations["GetProviderDocItem"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/{version}/cdktf/{language}/index.md": {
-    /** Returns a CDKTF root document */
-    get: operations["GetProviderCDKTFDoc"];
-  };
-  "/registry/docs/providers/{namespace}/{name}/{version}/cdktf/{language}/{kind}s/{document}.md": {
-    /** Returns a CDKTF document item */
-    get: operations["GetProviderCDKTFDocItem"];
-  };
-  "/registry/docs/search": {
-    /** Returns a list of search results matching the query */
-    get: operations["Search"];
-  };
-  "/top/providers": {
-    /** Returns a list of the top providers ordered by popularity */
-    get: operations["GetTopProviders"];
-  };
+    "/registry/docs/modules/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get module list
+         * @description Returns a list of all modules
+         */
+        get: operations["GetModuleList"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/modules/{namespace}/{name}/{target}/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get module
+         * @description Returns a list of all versions of a module with metadata
+         */
+        get: operations["GetModule"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/modules/{namespace}/{name}/{target}/{version}/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get module version
+         * @description Returns the details of a specific module version
+         */
+        get: operations["GetModuleVersion"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/modules/{namespace}/{name}/{target}/{version}/README.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get module readme
+         * @description Returns the readme of a module
+         */
+        get: operations["GetModuleReadme"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/modules/{namespace}/{name}/{target}/{version}/modules/{submodule}/README.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get submodule readme
+         * @description Returns the readme of a submodule
+         */
+        get: operations["GetSubmoduleReadme"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/modules/{namespace}/{name}/{target}/{version}/examples/{example}/README.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get module example readme
+         * @description Returns the readme of a module example
+         */
+        get: operations["GetModuleExampleReadme"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider list
+         * @description Returns a list of all providers
+         */
+        get: operations["GetProviderList"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider
+         * @description Returns a list of all versions of a provider with metadata
+         */
+        get: operations["GetProvider"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/{version}/index.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider version
+         * @description Returns the details of a specific provider version
+         */
+        get: operations["GetProviderVersion"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/{version}/index.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider documentation
+         * @description Returns a root provider document if it exists
+         */
+        get: operations["GetProviderDoc"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/{version}/{kind}s/{document}.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider document item
+         * @description Returns a provider document
+         */
+        get: operations["GetProviderDocItem"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/{version}/cdktf/{language}/index.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider CDKTF documentation
+         * @description Returns a CDKTF root document
+         */
+        get: operations["GetProviderCDKTFDoc"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/providers/{namespace}/{name}/{version}/cdktf/{language}/{kind}s/{document}.md": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get provider CDKTF document item
+         * @description Returns a CDKTF document item
+         */
+        get: operations["GetProviderCDKTFDocItem"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/registry/docs/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search
+         * @description Returns a list of search results matching the query
+         */
+        get: operations["Search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/top/providers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get top providers
+         * @description Returns a list of the top providers ordered by popularity
+         */
+        get: operations["GetTopProviders"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-
+export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    ModuleList: {
-      modules: components["schemas"]["Module"][];
+    schemas: {
+        ModuleList: {
+            modules: components["schemas"]["Module"][];
+        };
+        Module: {
+            addr: components["schemas"]["ModuleAddr"];
+            blocked_reason?: string;
+            description: string;
+            /**
+             * Format: int64
+             * @description ForkCount indicates how many forks this provider has
+             */
+            fork_count: number;
+            fork_of?: components["schemas"]["ModuleAddr"];
+            /** @description ForkOfLink may contain a link to a repository this provider is forked from */
+            fork_of_link?: string;
+            is_blocked: boolean;
+            /**
+             * Format: int64
+             * @description Popularity indicates how popular the underlying repository is in the VCS system
+             */
+            popularity: number;
+            /**
+             * Format: int64
+             * @description UpstreamForkCount contains the number of forks of the upstream repository
+             */
+            upstream_fork_count?: number;
+            /**
+             * Format: int64
+             * @description UpstreamPopularity contains the popularity of the original repository this repository is forked of
+             */
+            upstream_popularity?: number;
+            versions: components["schemas"]["ModuleVersionDescriptor"][];
+        };
+        /** @description ModuleAddr describes a module address enriched with data for the API */
+        ModuleAddr: {
+            /** @description Contains the display version of the addr presentable to the end user. This may be capitalized. */
+            display: string;
+            /** @description Contains the name of the addr */
+            name: string;
+            /** @description Contains the namespace of the addr */
+            namespace: string;
+            /** @description Contains the target system of the addr */
+            target: string;
+        };
+        ModuleVersion: {
+            dependencies: components["schemas"]["ModuleDependency"][];
+            edit_link?: string;
+            /** @description Examples lists all examples for this version */
+            examples: {
+                [key: string]: components["schemas"]["ModuleExample"];
+            };
+            id: components["schemas"]["ModuleVersionNumber"];
+            /** @description IncompatibleLicense indicates that there are no licenses or there is one or more license that are not approved */
+            incompatible_license: boolean;
+            licenses: components["schemas"]["LicenseList"];
+            /** @description Link holds the link to the repository browse URL */
+            link?: string;
+            outputs: {
+                [key: string]: components["schemas"]["Output"];
+            };
+            providers: components["schemas"]["ProviderDependency"][];
+            /** Format: date-time */
+            published: string;
+            /** @description Readme indicates that the submodule has a readme available */
+            readme: boolean;
+            resources: components["schemas"]["Resource"][];
+            /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
+            schema_error: string;
+            /** @description Submodules lists all submodules of this version */
+            submodules: {
+                [key: string]: components["schemas"]["Submodule"];
+            };
+            variables: {
+                [key: string]: components["schemas"]["Variable"];
+            };
+            /** @description VCSRepository holds the URL to the versioning system for this repository */
+            vcs_repository: string;
+        };
+        /** ModuleVersionDescriptor describes a single version */
+        ModuleVersionDescriptor: {
+            id: components["schemas"]["ModuleVersionNumber"];
+            /** Format: date-time */
+            published: string;
+        };
+        /** @description VersionNumber describes the semver version number. Note that in contrast to provider versions module versions do not have a compulsory "v" prefix */
+        ModuleVersionNumber: string;
+        /** ModuleDependency describes a module call as a dependency as the UI expects it */
+        ModuleDependency: {
+            name: string;
+            source: string;
+            version_constraint: string;
+        };
+        /** @description Example describes a single example for a Documentation. You can query the files and the readme using the corresponding API */
+        ModuleExample: {
+            edit_link?: string;
+            outputs: {
+                [key: string]: components["schemas"]["Output"];
+            };
+            /** @description Readme indicates that the submodule has a readme available */
+            readme: boolean;
+            /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
+            schema_error: string;
+            variables: {
+                [key: string]: components["schemas"]["Variable"];
+            };
+        };
+        /** Output describes a module output as the UI expects it */
+        Output: {
+            description: string;
+            sensitive: boolean;
+        };
+        /** Variable describes a variable as the UI expects it */
+        Variable: {
+            default: unknown;
+            description: string;
+            required: boolean;
+            sensitive: boolean;
+            type: string;
+        };
+        /** Resource describes a resource a module uses as the UI expects it */
+        Resource: {
+            address: string;
+            name: string;
+            type: string;
+        };
+        /** Submodule describes a submodule within a module */
+        Submodule: {
+            dependencies: components["schemas"]["ModuleDependency"][];
+            edit_link?: string;
+            outputs: {
+                [key: string]: components["schemas"]["Output"];
+            };
+            providers: components["schemas"]["ProviderDependency"][];
+            /** @description Readme indicates that the submodule has a readme available */
+            readme: boolean;
+            resources: components["schemas"]["Resource"][];
+            /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
+            schema_error: string;
+            variables: {
+                [key: string]: components["schemas"]["Variable"];
+            };
+        };
+        /** ProviderList is a list of providers */
+        ProviderList: {
+            /** @description Providers holds the list of providers */
+            providers: components["schemas"]["Provider"][];
+        };
+        /** Provider is a single provider with all its versions */
+        Provider: {
+            addr: components["schemas"]["ProviderAddr"];
+            blocked_reason?: string;
+            canonical_addr?: components["schemas"]["ProviderAddr"];
+            /** @description Description is the extracted description for the provider. This may be empty */
+            description: string;
+            /**
+             * Format: int64
+             * @description ForkCount indicates how many forks this provider has
+             */
+            fork_count: number;
+            fork_of?: components["schemas"]["ProviderAddr"];
+            /** @description ForkOfLink may contain a link to a repository this provider is forked from */
+            fork_of_link?: string;
+            is_blocked: boolean;
+            /** @description Link contains the link to the repository this provider was built from. Note that this may not match the Addr field since the repository may be different */
+            link?: string;
+            /**
+             * Format: int64
+             * @description Popularity indicates how popular the underlying repository is in the VCS system
+             */
+            popularity: number;
+            /** @description ReverseAliases contains a list of providers that are aliases of the current one. This field is the inverse of CanonicalAddr */
+            reverse_aliases?: components["schemas"]["ProviderAddr"][];
+            /**
+             * Format: int64
+             * @description UpstreamForkCount contains the number of forks of the upstream repository
+             */
+            upstream_fork_count?: number;
+            /**
+             * Format: int64
+             * @description UpstreamPopularity contains the popularity of the original repository this repository is forked of
+             */
+            upstream_popularity?: number;
+            /** @description Versions holds the list of versions this provider supports */
+            versions: components["schemas"]["ProviderVersionDescriptor"][];
+            /** @description Warnings contains a list of warning strings issued to the OpenTofu client when fetching the provider info */
+            warnings?: string[];
+        };
+        /** ProviderAddr is an enriched model of provider.Addr with display properties for the frontend */
+        ProviderAddr: {
+            /** @description Display contains the user-readable display variant of this addr. This may be capitalized */
+            display: string;
+            /** @description Name contains the lower-case name part of the addr */
+            name: string;
+            /** @description Namespace contains the lower-case namespace part of the addr */
+            namespace: string;
+        };
+        /** ProviderVersion describes a single provider version */
+        ProviderVersion: {
+            cdktf_docs: {
+                [key: string]: components["schemas"]["ProviderDocs"];
+            };
+            docs: components["schemas"]["ProviderDocs"];
+            id: components["schemas"]["ProviderVersionNumber"];
+            /** @description IncompatibleLicense indicates that there are no licenses or there is one or more license that are not approved */
+            incompatible_license: boolean;
+            license: components["schemas"]["LicenseList"];
+            link?: string;
+            /** Format: date-time */
+            published: string;
+        };
+        /** ProviderVersionDescriptor describes a provider version */
+        ProviderVersionDescriptor: {
+            id: components["schemas"]["ProviderVersionNumber"];
+            /** Format: date-time */
+            published: string;
+        };
+        /** VersionNumber describes the semver version number */
+        ProviderVersionNumber: string;
+        /** ProviderDocs describes either a provider or a CDKTF language */
+        ProviderDocs: {
+            datasources: components["schemas"]["ProviderDocItem"][];
+            functions: components["schemas"]["ProviderDocItem"][];
+            guides: components["schemas"]["ProviderDocItem"][];
+            index?: components["schemas"]["ProviderDocItem"];
+            resources: components["schemas"]["ProviderDocItem"][];
+        };
+        /** ProviderDocItem describes a single documentation item */
+        ProviderDocItem: {
+            description?: string;
+            edit_link?: string;
+            name?: components["schemas"]["DocItemName"];
+            subcategory?: string;
+            title?: string;
+        };
+        /** ProviderDependency describes a provider dependency of a module */
+        ProviderDependency: {
+            alias: string;
+            full_name: string;
+            name: string;
+            version_constraint: string;
+        };
+        DocItemName: string;
+        /** List is a list of licenses found in a repository */
+        LicenseList: components["schemas"]["License"][];
+        /** @description License describes a license found in a repository. Note the license detection is best effort */
+        License: {
+            /**
+             * Format: float
+             * @description Confidence indicates how accurate the license detection is
+             */
+            confidence: number;
+            /** @description File holds the file in the repository where the license was detected */
+            file: string;
+            /** @description IsCompatible signals if the license is compatible with the OpenTofu project */
+            is_compatible: boolean;
+            /** @description Link may contain a link to the license file for humans to view. This may be empty */
+            link?: string;
+            /** @description SPDX is the SPDX identifier for the license */
+            spdx: string;
+        };
+        /** SearchResultItem describes a single search result item */
+        SearchResultItem: {
+            /** @description The address of the module or provider */
+            addr: string;
+            /** @description A brief description of the result item */
+            description: string;
+            /** @description The unique identifier for the result item */
+            id: string;
+            /** @description The last updated timestamp for the result item */
+            last_updated: string;
+            /** @description A map of variables used to generate the link for the result item */
+            link_variables: {
+                [key: string]: string;
+            };
+            /**
+             * Format: int32
+             * @description The rank of the result in the search results
+             */
+            rank: number;
+            /** @description The number of times the search term matched in this result */
+            term_match_count: string;
+            /** @description The title of the result item */
+            title: string;
+            /** @description The type of the result item (e.g., module, provider, datasource etc) */
+            type: string;
+            /** @description The version of the module or provider */
+            version: string;
+        };
+        /** TopProviderItem describes a provider in the top providers list */
+        TopProviderItem: {
+            /** @description The address of the provider */
+            addr: string;
+            /** @description The version of the provider */
+            version: string;
+            /**
+             * Format: int64
+             * @description The popularity score of the provider based on repository stars or similar metrics
+             */
+            popularity: number;
+        };
     };
-    Module: {
-      addr: components["schemas"]["ModuleAddr"];
-      blocked_reason?: string;
-      description: string;
-      /**
-       * Format: int64
-       * @description ForkCount indicates how many forks this provider has
-       */
-      fork_count: number;
-      fork_of?: components["schemas"]["ModuleAddr"];
-      /** @description ForkOfLink may contain a link to a repository this provider is forked from */
-      fork_of_link?: string;
-      is_blocked: boolean;
-      /**
-       * Format: int64
-       * @description Popularity indicates how popular the underlying repository is in the VCS system
-       */
-      popularity: number;
-      /**
-       * Format: int64
-       * @description UpstreamForkCount contains the number of forks of the upstream repository
-       */
-      upstream_fork_count?: number;
-      /**
-       * Format: int64
-       * @description UpstreamPopularity contains the popularity of the original repository this repository is forked of
-       */
-      upstream_popularity?: number;
-      versions: components["schemas"]["ModuleVersionDescriptor"][];
-    };
-    /** @description ModuleAddr describes a module address enriched with data for the API */
-    ModuleAddr: {
-      /** @description Contains the display version of the addr presentable to the end user. This may be capitalized. */
-      display: string;
-      /** @description Contains the name of the addr */
-      name: string;
-      /** @description Contains the namespace of the addr */
-      namespace: string;
-      /** @description Contains the target system of the addr */
-      target: string;
-    };
-    ModuleVersion: {
-      dependencies: components["schemas"]["ModuleDependency"][];
-      edit_link?: string;
-      /** @description Examples lists all examples for this version */
-      examples: { [key: string]: components["schemas"]["ModuleExample"] };
-      id: components["schemas"]["ModuleVersionNumber"];
-      /** @description IncompatibleLicense indicates that there are no licenses or there is one or more license that are not approved */
-      incompatible_license: boolean;
-      licenses: components["schemas"]["LicenseList"];
-      /** @description Link holds the link to the repository browse URL */
-      link?: string;
-      outputs: { [key: string]: components["schemas"]["Output"] };
-      providers: components["schemas"]["ProviderDependency"][];
-      /** Format: date-time */
-      published: string;
-      /** @description Readme indicates that the submodule has a readme available */
-      readme: boolean;
-      resources: components["schemas"]["Resource"][];
-      /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
-      schema_error: string;
-      /** @description Submodules lists all submodules of this version */
-      submodules: { [key: string]: components["schemas"]["Submodule"] };
-      variables: { [key: string]: components["schemas"]["Variable"] };
-      /** @description VCSRepository holds the URL to the versioning system for this repository */
-      vcs_repository: string;
-    };
-    /** ModuleVersionDescriptor describes a single version */
-    ModuleVersionDescriptor: {
-      id: components["schemas"]["ModuleVersionNumber"];
-      /** Format: date-time */
-      published: string;
-    };
-    /** @description VersionNumber describes the semver version number. Note that in contrast to provider versions module versions do not have a compulsory "v" prefix */
-    ModuleVersionNumber: string;
-    /** ModuleDependency describes a module call as a dependency as the UI expects it */
-    ModuleDependency: {
-      name: string;
-      source: string;
-      version_constraint: string;
-    };
-    /** @description Example describes a single example for a Documentation. You can query the files and the readme using the corresponding API */
-    ModuleExample: {
-      edit_link?: string;
-      outputs: { [key: string]: components["schemas"]["Output"] };
-      /** @description Readme indicates that the submodule has a readme available */
-      readme: boolean;
-      /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
-      schema_error: string;
-      variables: { [key: string]: components["schemas"]["Variable"] };
-    };
-    /** Output describes a module output as the UI expects it */
-    Output: {
-      description: string;
-      sensitive: boolean;
-    };
-    /** Variable describes a variable as the UI expects it */
-    Variable: {
-      default: unknown;
-      description: string;
-      required: boolean;
-      sensitive: boolean;
-      type: string;
-    };
-    /** Resource describes a resource a module uses as the UI expects it */
-    Resource: {
-      address: string;
-      name: string;
-      type: string;
-    };
-    /** Submodule describes a submodule within a module */
-    Submodule: {
-      dependencies: components["schemas"]["ModuleDependency"][];
-      edit_link?: string;
-      outputs: { [key: string]: components["schemas"]["Output"] };
-      providers: components["schemas"]["ProviderDependency"][];
-      /** @description Readme indicates that the submodule has a readme available */
-      readme: boolean;
-      resources: components["schemas"]["Resource"][];
-      /** @description SchemaError contains an error message to show why the schema is not available. This should be shown to the user as a warning message */
-      schema_error: string;
-      variables: { [key: string]: components["schemas"]["Variable"] };
-    };
-    /** ProviderList is a list of providers */
-    ProviderList: {
-      /** @description Providers holds the list of providers */
-      providers: components["schemas"]["Provider"][];
-    };
-    /** Provider is a single provider with all its versions */
-    Provider: {
-      addr: components["schemas"]["ProviderAddr"];
-      blocked_reason?: string;
-      canonical_addr?: components["schemas"]["ProviderAddr"];
-      /** @description Description is the extracted description for the provider. This may be empty */
-      description: string;
-      /**
-       * Format: int64
-       * @description ForkCount indicates how many forks this provider has
-       */
-      fork_count: number;
-      fork_of?: components["schemas"]["ProviderAddr"];
-      /** @description ForkOfLink may contain a link to a repository this provider is forked from */
-      fork_of_link?: string;
-      is_blocked: boolean;
-      /** @description Link contains the link to the repository this provider was built from. Note that this may not match the Addr field since the repository may be different */
-      link?: string;
-      /**
-       * Format: int64
-       * @description Popularity indicates how popular the underlying repository is in the VCS system
-       */
-      popularity: number;
-      /** @description ReverseAliases contains a list of providers that are aliases of the current one. This field is the inverse of CanonicalAddr */
-      reverse_aliases?: components["schemas"]["ProviderAddr"][];
-      /**
-       * Format: int64
-       * @description UpstreamForkCount contains the number of forks of the upstream repository
-       */
-      upstream_fork_count?: number;
-      /**
-       * Format: int64
-       * @description UpstreamPopularity contains the popularity of the original repository this repository is forked of
-       */
-      upstream_popularity?: number;
-      /** @description Versions holds the list of versions this provider supports */
-      versions: components["schemas"]["ProviderVersionDescriptor"][];
-      /** @description Warnings contains a list of warning strings issued to the OpenTofu client when fetching the provider info */
-      warnings?: string[];
-    };
-    /** ProviderAddr is an enriched model of provider.Addr with display properties for the frontend */
-    ProviderAddr: {
-      /** @description Display contains the user-readable display variant of this addr. This may be capitalized */
-      display: string;
-      /** @description Name contains the lower-case name part of the addr */
-      name: string;
-      /** @description Namespace contains the lower-case namespace part of the addr */
-      namespace: string;
-    };
-    /** ProviderVersion describes a single provider version */
-    ProviderVersion: {
-      cdktf_docs: { [key: string]: components["schemas"]["ProviderDocs"] };
-      docs: components["schemas"]["ProviderDocs"];
-      id: components["schemas"]["ProviderVersionNumber"];
-      /** @description IncompatibleLicense indicates that there are no licenses or there is one or more license that are not approved */
-      incompatible_license: boolean;
-      license: components["schemas"]["LicenseList"];
-      link?: string;
-      /** Format: date-time */
-      published: string;
-    };
-    /** ProviderVersionDescriptor describes a provider version */
-    ProviderVersionDescriptor: {
-      id: components["schemas"]["ProviderVersionNumber"];
-      /** Format: date-time */
-      published: string;
-    };
-    /** VersionNumber describes the semver version number */
-    ProviderVersionNumber: string;
-    /** ProviderDocs describes either a provider or a CDKTF language */
-    ProviderDocs: {
-      datasources: components["schemas"]["ProviderDocItem"][];
-      functions: components["schemas"]["ProviderDocItem"][];
-      guides: components["schemas"]["ProviderDocItem"][];
-      index?: components["schemas"]["ProviderDocItem"];
-      resources: components["schemas"]["ProviderDocItem"][];
-    };
-    /** ProviderDocItem describes a single documentation item */
-    ProviderDocItem: {
-      description?: string;
-      edit_link?: string;
-      name?: components["schemas"]["DocItemName"];
-      subcategory?: string;
-      title?: string;
-    };
-    /** ProviderDependency describes a provider dependency of a module */
-    ProviderDependency: {
-      alias: string;
-      full_name: string;
-      name: string;
-      version_constraint: string;
-    };
-    DocItemName: string;
-    /** List is a list of licenses found in a repository */
-    LicenseList: components["schemas"]["License"][];
-    /** @description License describes a license found in a repository. Note the license detection is best effort */
-    License: {
-      /**
-       * Format: float
-       * @description Confidence indicates how accurate the license detection is
-       */
-      confidence: number;
-      /** @description File holds the file in the repository where the license was detected */
-      file: string;
-      /** @description IsCompatible signals if the license is compatible with the OpenTofu project */
-      is_compatible: boolean;
-      /** @description Link may contain a link to the license file for humans to view. This may be empty */
-      link?: string;
-      /** @description SPDX is the SPDX identifier for the license */
-      spdx: string;
-    };
-    /** SearchResultItem describes a single search result item */
-    SearchResultItem: {
-      /** @description The address of the module or provider */
-      addr: string;
-      /** @description A brief description of the result item */
-      description: string;
-      /** @description The unique identifier for the result item */
-      id: string;
-      /** @description The last updated timestamp for the result item */
-      last_updated: string;
-      /** @description A map of variables used to generate the link for the result item */
-      link_variables: { [key: string]: string };
-      /**
-       * Format: int32
-       * @description The rank of the result in the search results
-       */
-      rank: number;
-      /** @description The number of times the search term matched in this result */
-      term_match_count: string;
-      /** @description The title of the result item */
-      title: string;
-      /** @description The type of the result item (e.g., module, provider, datasource etc) */
-      type: string;
-      /** @description The version of the module or provider */
-      version: string;
-    };
-    /** TopProviderItem describes a provider in the top providers list */
-    TopProviderItem: {
-      /** @description The address of the provider */
-      addr: string;
-      /** @description The version of the provider */
-      version: string;
-      /**
-       * Format: int64
-       * @description The popularity score of the provider based on repository stars or similar metrics
-       */
-      popularity: number;
-    };
-  };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-
+export type $defs = Record<string, never>;
 export interface operations {
-  /** Returns a list of all modules */
-  GetModuleList: {
-    responses: {
-      /** A list of all modules */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ModuleList"];
+    GetModuleList: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns a list of all versions of a module with metadata */
-  GetModule: {
-    parameters: {
-      path: {
-        /** Namespace of the module, all lower case */
-        namespace: string;
-        /** Name of the module, all lower case */
-        name: string;
-        /** Target system of the module, all lower case */
-        target: string;
-      };
-    };
-    responses: {
-      /** A list of all versions of a module with metadata */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Module"];
+        requestBody?: never;
+        responses: {
+            /** @description A list of all modules */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModuleList"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns the details of a specific module version */
-  GetModuleVersion: {
-    parameters: {
-      path: {
-        /** Namespace of the module, all lower case */
-        namespace: string;
-        /** Name of the module, all lower case */
-        name: string;
-        /** Target system of the module, all lower case */
-        target: string;
-        /** Version number of the module with the "v" prefix */
-        version: string;
-      };
-    };
-    responses: {
-      /** The details of a specific module version */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ModuleVersion"];
+    GetModule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the module, all lower case */
+                namespace: string;
+                /** @description Name of the module, all lower case */
+                name: string;
+                /** @description Target system of the module, all lower case */
+                target: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns the readme of a module */
-  GetModuleReadme: {
-    parameters: {
-      path: {
-        /** Namespace of the module, all lower case */
-        namespace: string;
-        /** Name of the module, all lower case */
-        name: string;
-        /** Target system of the module, all lower case */
-        target: string;
-        /** Version number of the module with the "v" prefix */
-        version: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+        requestBody?: never;
+        responses: {
+            /** @description A list of all versions of a module with metadata */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Module"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns the readme of a submodule */
-  GetSubmoduleReadme: {
-    parameters: {
-      path: {
-        /** Namespace of the module, all lower case */
-        namespace: string;
-        /** Name of the module, all lower case */
-        name: string;
-        /** Target system of the module, all lower case */
-        target: string;
-        /** Version number of the module with the "v" prefix */
-        version: string;
-        /** Submodule name */
-        submodule: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+    GetModuleVersion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the module, all lower case */
+                namespace: string;
+                /** @description Name of the module, all lower case */
+                name: string;
+                /** @description Target system of the module, all lower case */
+                target: string;
+                /** @description Version number of the module with the "v" prefix */
+                version: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns the readme of a module example */
-  GetModuleExampleReadme: {
-    parameters: {
-      path: {
-        /** Namespace of the module, all lower case */
-        namespace: string;
-        /** Name of the module, all lower case */
-        name: string;
-        /** Target system of the module, all lower case */
-        target: string;
-        /** Version number of the module with the "v" prefix */
-        version: string;
-        /** Example name */
-        example: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+        requestBody?: never;
+        responses: {
+            /** @description The details of a specific module version */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModuleVersion"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns a list of all providers */
-  GetProviderList: {
-    responses: {
-      /** A list of all providers */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ProviderList"];
+    GetModuleReadme: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the module, all lower case */
+                namespace: string;
+                /** @description Name of the module, all lower case */
+                name: string;
+                /** @description Target system of the module, all lower case */
+                target: string;
+                /** @description Version number of the module with the "v" prefix */
+                version: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns a list of all versions of a provider with metadata */
-  GetProvider: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-      };
-    };
-    responses: {
-      /** A list of all versions of a provider with metadata */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Provider"];
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns the details of a specific provider version */
-  GetProviderVersion: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-        /** Version number of the provider with the "v" prefix */
-        version: string;
-      };
-    };
-    responses: {
-      /** The details of a specific provider version */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ProviderVersion"];
+    GetSubmoduleReadme: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the module, all lower case */
+                namespace: string;
+                /** @description Name of the module, all lower case */
+                name: string;
+                /** @description Target system of the module, all lower case */
+                target: string;
+                /** @description Version number of the module with the "v" prefix */
+                version: string;
+                /** @description Submodule name */
+                submodule: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns a root provider document if it exists */
-  GetProviderDoc: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-        /** Version number of the provider with the "v" prefix */
-        version: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns a provider document */
-  GetProviderDocItem: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-        /** Version number of the provider with the "v" prefix */
-        version: string;
-        /** The kind of document to fetch */
-        kind: "resource" | "datasource" | "function" | "guide";
-        /** The name of the document without the .md suffix */
-        document: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+    GetModuleExampleReadme: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the module, all lower case */
+                namespace: string;
+                /** @description Name of the module, all lower case */
+                name: string;
+                /** @description Target system of the module, all lower case */
+                target: string;
+                /** @description Version number of the module with the "v" prefix */
+                version: string;
+                /** @description Example name */
+                example: string;
+            };
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns a CDKTF root document */
-  GetProviderCDKTFDoc: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-        /** Version number of the provider with the "v" prefix */
-        version: string;
-        /** The CDKTF language to fetch */
-        language: "typescript" | "python" | "go" | "csharp" | "java";
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
         };
-      };
     };
-  };
-  /** Returns a CDKTF document item */
-  GetProviderCDKTFDocItem: {
-    parameters: {
-      path: {
-        /** Namespace of the provider, all lower case */
-        namespace: string;
-        /** Name of the provider, all lower case */
-        name: string;
-        /** Version number of the provider with the "v" prefix */
-        version: string;
-        /** The CDKTF language to fetch */
-        language: "typescript" | "python" | "go" | "csharp" | "java";
-        /** The kind of document to fetch */
-        kind: "resource" | "datasource" | "function" | "guide";
-        /** The name of the document without the .md suffix */
-        document: string;
-      };
-    };
-    responses: {
-      /** The contents of the document */
-      200: {
-        content: {
-          "text/markdown": string;
+    GetProviderList: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Returns a list of search results matching the query */
-  Search: {
-    parameters: {
-      query: {
-        /** The search query string. This should be a URL encoded string */
-        q: string;
-      };
-    };
-    responses: {
-      /** A list of search results matching the query */
-      200: {
-        content: {
-          "application/json": components["schemas"]["SearchResultItem"][];
+        requestBody?: never;
+        responses: {
+            /** @description A list of all providers */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProviderList"];
+                };
+            };
         };
-      };
-      /** Invalid search query */
-      400: unknown;
     };
-  };
-  /** Returns a list of the top providers ordered by popularity */
-  GetTopProviders: {
-    parameters: {
-      query: {
-        /** The maximum number of providers to return (must be between 1 and 500) */
-        limit: number;
-      };
-    };
-    responses: {
-      /** A list of top providers ordered by popularity */
-      200: {
-        content: {
-          "application/json": components["schemas"]["TopProviderItem"][];
+    GetProvider: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+            };
+            cookie?: never;
         };
-      };
-      /** Invalid limit parameter */
-      400: unknown;
+        requestBody?: never;
+        responses: {
+            /** @description A list of all versions of a provider with metadata */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Provider"];
+                };
+            };
+        };
     };
-  };
+    GetProviderVersion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+                /** @description Version number of the provider with the "v" prefix */
+                version: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The details of a specific provider version */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProviderVersion"];
+                };
+            };
+        };
+    };
+    GetProviderDoc: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+                /** @description Version number of the provider with the "v" prefix */
+                version: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
+        };
+    };
+    GetProviderDocItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+                /** @description Version number of the provider with the "v" prefix */
+                version: string;
+                /** @description The kind of document to fetch */
+                kind: "resource" | "datasource" | "function" | "guide";
+                /** @description The name of the document without the .md suffix */
+                document: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
+        };
+    };
+    GetProviderCDKTFDoc: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+                /** @description Version number of the provider with the "v" prefix */
+                version: string;
+                /** @description The CDKTF language to fetch */
+                language: "typescript" | "python" | "go" | "csharp" | "java";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
+        };
+    };
+    GetProviderCDKTFDocItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Namespace of the provider, all lower case */
+                namespace: string;
+                /** @description Name of the provider, all lower case */
+                name: string;
+                /** @description Version number of the provider with the "v" prefix */
+                version: string;
+                /** @description The CDKTF language to fetch */
+                language: "typescript" | "python" | "go" | "csharp" | "java";
+                /** @description The kind of document to fetch */
+                kind: "resource" | "datasource" | "function" | "guide";
+                /** @description The name of the document without the .md suffix */
+                document: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The contents of the document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/markdown": string;
+                };
+            };
+        };
+    };
+    Search: {
+        parameters: {
+            query: {
+                /** @description The search query string. This should be a URL encoded string */
+                q: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of search results matching the query */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResultItem"][];
+                };
+            };
+            /** @description Invalid search query */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetTopProviders: {
+        parameters: {
+            query: {
+                /** @description The maximum number of providers to return (must be between 1 and 500) */
+                limit: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description A list of top providers ordered by popularity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TopProviderItem"][];
+                };
+            };
+            /** @description Invalid limit parameter */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }
-
-export interface external {}
