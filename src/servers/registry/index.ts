@@ -48,7 +48,13 @@ You can:
 This MCP server is designed to work with OpenTofu (A fork of HashiCorp Terraform) and provides access to the OpenTofu Registry.
 For more details, use the search and info tools above to explore the registry.`;
 
-export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch) {
+// Wraps a tool handler for observability (e.g. tracing spans). This is so the CF
+// worker can have telemetry but locally we dont need it.
+export type ToolTracer = <T, R>(toolName: string, handler: (params: T) => Promise<R>) => (params: T) => Promise<R>;
+
+const identityTracer: ToolTracer = (_toolName, handler) => handler;
+
+export async function setupRegistry(server: McpServer, f: typeof globalThis.fetch = globalThis.fetch, traced: ToolTracer = identityTracer) {
   const client = new RegistryClient(API_BASE_URL, f);
 
   server.registerResource("opentofu-registry-info", "opentofu:registry-info", {}, async (uri) => ({
@@ -67,7 +73,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       description: "Search the OpenTofu Registry to find providers, modules, resources, and data sources. Use simple terms without prefixes like 'terraform-provider-' or 'terraform-module-'.",
       inputSchema: searchSchema,
     },
-    async (params) => {
+    traced("search-opentofu-registry", async (params) => {
       try {
         const results = await client.search(params.query, params.type);
         if (results.length === 0) {
@@ -78,7 +84,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
         return textResult(`Error searching the OpenTofu Registry: ${errorMessage}`);
       }
-    },
+    }),
   );
 
   server.registerTool(
@@ -87,7 +93,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       description: "Get detailed information about a specific OpenTofu provider by namespace and name. Do NOT include 'terraform-provider-' prefix in the name.",
       inputSchema: providerDetailsSchema,
     },
-    async (params) => {
+    traced("get-provider-details", async (params) => {
       try {
         const provider = await client.getProviderDetails(params.namespace, params.name);
         return textResult(renderProviderDetails(params.name, params.namespace, provider));
@@ -95,7 +101,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
         const errorMessage = error instanceof Error ? error.message : "Provider not found";
         return textResult(`Failed to get details for provider ${params.namespace}/${params.name}: ${errorMessage}`);
       }
-    },
+    }),
   );
 
   server.registerTool(
@@ -104,7 +110,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       description: "Get detailed information about a specific OpenTofu module by namespace, name, and target. Use the simple module name, NOT the full repository name.",
       inputSchema: moduleDetailsSchema,
     },
-    async (params) => {
+    traced("get-module-details", async (params) => {
       try {
         const module = await client.getModuleDetails(params.namespace, params.name, params.target);
         return textResult(renderModuleDetails(module));
@@ -112,7 +118,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
         const errorMessage = error instanceof Error ? error.message : "Module not found";
         return textResult(`Failed to get details for module ${params.namespace}/${params.name} (${params.target}): ${errorMessage}`);
       }
-    },
+    }),
   );
 
   server.registerTool(
@@ -121,7 +127,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       description: "Get detailed documentation for a specific OpenTofu resource by provider namespace, provider name, and resource name.",
       inputSchema: resourceDocsSchema,
     },
-    async (params) => {
+    traced("get-resource-docs", async (params) => {
       try {
         const resourceDocs = await client.getResourceDocs(params.namespace, params.name, params.resource, params.version);
         return textResult(resourceDocs);
@@ -129,7 +135,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
         const errorMessage = error instanceof Error ? error.message : "Resource documentation not found";
         return textResult(`Failed to get documentation for resource ${params.name}_${params.resource}: ${errorMessage}`);
       }
-    },
+    }),
   );
 
   server.registerTool(
@@ -138,7 +144,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       description: "Get detailed documentation for a specific OpenTofu data source by provider namespace, provider name, and data source name.",
       inputSchema: dataSourceDocsSchema,
     },
-    async (params) => {
+    traced("get-datasource-docs", async (params) => {
       try {
         const dataSourceDocs = await client.getDataSourceDocs(params.namespace, params.name, params.dataSource, params.version);
         return textResult(dataSourceDocs);
@@ -146,7 +152,7 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
         const errorMessage = error instanceof Error ? error.message : "Data source documentation not found";
         return textResult(`Failed to get documentation for data source ${params.name}_${params.dataSource}: ${errorMessage}`);
       }
-    },
+    }),
   );
 }
 

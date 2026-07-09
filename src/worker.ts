@@ -1,7 +1,17 @@
+import { tracing } from "cloudflare:workers";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createMcpHandler } from "agents/mcp";
-import { serverInstructions as instructions, setupRegistry } from "./servers/registry/index.js";
+import { serverInstructions as instructions, setupRegistry, type ToolTracer } from "./servers/registry/index.js";
 import { PACKAGE_NAME, PACKAGE_VERSION } from "./utils.js";
+
+// Wraps each tool call in a span so we can see which tool ran, how long it
+// took, and the arguments it received.
+const traced: ToolTracer = (toolName, handler) => (params) =>
+  tracing.enterSpan(`tool:${toolName}`, async (span) => {
+    span.setAttribute("mcp.tool.name", toolName);
+    span.setAttribute("mcp.tool.args", JSON.stringify(params));
+    return handler(params);
+  });
 
 // Creates a new McpServer per request — stateless, no Durable Objects.
 // Previously used McpAgent which created a persistent DO per session,
@@ -15,7 +25,7 @@ async function createServer(registryFetch: typeof globalThis.fetch) {
     { instructions },
   );
 
-  await setupRegistry(server, registryFetch);
+  await setupRegistry(server, registryFetch, traced);
   return server;
 }
 

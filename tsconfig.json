@@ -11,7 +11,7 @@
     "declaration": true,
     "sourceMap": true,
     "resolveJsonModule": true,
-    "types": ["node", "@cloudflare/workers-types"],
+    "types": ["node"],
   },
   "include": ["src/**/*", "worker-configuration.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", ".wrangler", "wrangler.toml",],
