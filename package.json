@@ -47,17 +47,16 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "agents": "^0.10.0",
-    "semver": "^7.7.4",
-    "zod": "^4.3.6"
+    "agents": "^0.17.3",
+    "semver": "^7.8.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
-    "@cloudflare/workers-types": "^4.20260408.1",
-    "@types/node": "^25.5.2",
+    "@biomejs/biome": "^2.5.3",
+    "@types/node": "^26.1.1",
     "@types/semver": "^7.7.1",
     "openapi-typescript": "^7.13.0",
-    "typescript": "^6.0.2",
-    "wrangler": "^4.81.0"
+    "typescript": "^7.0.2",
+    "wrangler": "^4.107.1"
   }
 }
