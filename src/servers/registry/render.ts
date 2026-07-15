@@ -28,6 +28,14 @@ ${provider.link ? `\n**Documentation**: ${provider.link}\n` : ""}`;
   return formattedResponse;
 }
 
+export function renderProviderVersions(name: string, namespace: string, data: { latest?: string; versions: { id: string; published: string }[] }): string {
+  return `## Versions for ${namespace}/${name}
+
+**Latest Version**: ${data.latest || "Unknown"}
+
+${data.versions.map((v) => `- ${v.id} (published: ${v.published})`).join("\n")}`;
+}
+
 export function renderModuleDetails(module: apiDefinition["Module"]): string {
   return `## Module: ${module.addr.display}\n
 ${module.description}
@@ -36,6 +44,14 @@ ${module.description}
 
 **Popularity Score**: ${module.popularity}
 ${module.fork_of ? `\n**Forked from**: ${module.fork_of.display}\n` : ""}${module.fork_count > 0 ? `\n**Fork count**: ${module.fork_count}\n` : ""}`;
+}
+
+export function renderModuleVersions(name: string, namespace: string, target: string, data: { latest?: string; versions: { id: string; published: string }[] }): string {
+  return `## Versions for ${namespace}/${name} (${target})
+
+**Latest Version**: ${data.latest || "Unknown"}
+
+${data.versions.map((v) => `- ${v.id} (published: ${v.published})`).join("\n")}`;
 }
 
 function truncateString(str: string | undefined, maxLength = 50): string | undefined {

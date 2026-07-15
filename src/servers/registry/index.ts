@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { API_BASE_URL, RegistryClient } from "../../registry/index.js";
-import { renderModuleDetails, renderProviderDetails, renderSearchResults } from "./render.js";
+import { renderModuleDetails, renderModuleVersions, renderProviderDetails, renderProviderVersions, renderSearchResults } from "./render.js";
 
 // Schema definitions
 const searchSchema = {
@@ -14,10 +14,39 @@ const providerDetailsSchema = {
   name: z.string().min(1).describe("Provider name WITHOUT 'terraform-provider-' prefix (e.g., 'aws', 'kubernetes', 'azurerm')"),
 };
 
+const providerVersionsOutputSchema = {
+  namespace: z.string().describe("Provider namespace"),
+  name: z.string().describe("Provider name"),
+  latest: z.string().optional().describe("The latest version id, e.g. 'v4.0.0'"),
+  versions: z
+    .array(
+      z.object({
+        id: z.string().describe("Version id, e.g. 'v4.0.0'"),
+        published: z.string().describe("ISO 8601 date-time the version was published"),
+      }),
+    )
+    .describe("All available versions, sorted newest-first"),
+};
+
 const moduleDetailsSchema = {
   namespace: z.string().min(1).describe("Module namespace without prefix (e.g., 'terraform-aws-modules')"),
   name: z.string().min(1).describe("Simple module name WITHOUT 'terraform-aws-' or similar prefix (e.g., 'vpc', 's3-bucket')"),
   target: z.string().min(1).describe("Module target platform (e.g., 'aws', 'kubernetes', 'azurerm')"),
+};
+
+const moduleVersionsOutputSchema = {
+  namespace: z.string().describe("Module namespace"),
+  name: z.string().describe("Module name"),
+  target: z.string().describe("Module target platform"),
+  latest: z.string().optional().describe("The latest version id, e.g. '4.0.0'"),
+  versions: z
+    .array(
+      z.object({
+        id: z.string().describe("Version id, e.g. '4.0.0'"),
+        published: z.string().describe("ISO 8601 date-time the version was published"),
+      }),
+    )
+    .describe("All available versions, sorted newest-first"),
 };
 
 const resourceDocsSchema = {
@@ -38,6 +67,7 @@ export const serverInstructions = `The OpenTofu Registry is a public index of pr
 You can:
 - **Search** for providers, modules, resources, and data sources using the \`search-opentofu-registry\` tool.
 - **Get detailed information** about a provider or module using \`get-provider-details\` or \`get-module-details\`.
+- **Get just the available versions** of a provider or module using \`get-provider-versions\` or \`get-module-versions\` (lighter-weight than the full details tools).
 - **Retrieve documentation** for a specific resource or data source using \`get-resource-docs\` or \`get-datasource-docs\`.
 
 **Tips:**
@@ -105,6 +135,34 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
   );
 
   server.registerTool(
+    "get-provider-versions",
+    {
+      description:
+        "Get the list of available versions for a specific OpenTofu provider by namespace and name, without fetching full provider documentation. Do NOT include 'terraform-provider-' prefix in the name.",
+      inputSchema: providerDetailsSchema,
+      outputSchema: providerVersionsOutputSchema,
+    },
+    traced("get-provider-versions", async (params) => {
+      try {
+        const versions = await client.getProviderVersions(params.namespace, params.name);
+        const structuredContent = {
+          namespace: params.namespace,
+          name: params.name,
+          latest: versions[0]?.id,
+          versions,
+        };
+        return {
+          structuredContent,
+          content: [{ type: "text" as const, text: renderProviderVersions(params.name, params.namespace, structuredContent) }],
+        };
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "Provider not found";
+        return errorResult(`Failed to get versions for provider ${params.namespace}/${params.name}: ${errorMessage}`);
+      }
+    }),
+  );
+
+  server.registerTool(
     "get-module-details",
     {
       description: "Get detailed information about a specific OpenTofu module by namespace, name, and target. Use the simple module name, NOT the full repository name.",
@@ -117,6 +175,34 @@ export async function setupRegistry(server: McpServer, f: typeof globalThis.fetc
       } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : "Module not found";
         return textResult(`Failed to get details for module ${params.namespace}/${params.name} (${params.target}): ${errorMessage}`);
+      }
+    }),
+  );
+
+  server.registerTool(
+    "get-module-versions",
+    {
+      description: "Get the list of available versions for a specific OpenTofu module by namespace, name, and target. Use the simple module name, NOT the full repository name.",
+      inputSchema: moduleDetailsSchema,
+      outputSchema: moduleVersionsOutputSchema,
+    },
+    traced("get-module-versions", async (params) => {
+      try {
+        const versions = await client.getModuleVersions(params.namespace, params.name, params.target);
+        const structuredContent = {
+          namespace: params.namespace,
+          name: params.name,
+          target: params.target,
+          latest: versions[0]?.id,
+          versions,
+        };
+        return {
+          structuredContent,
+          content: [{ type: "text" as const, text: renderModuleVersions(params.name, params.namespace, params.target, structuredContent) }],
+        };
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "Module not found";
+        return errorResult(`Failed to get versions for module ${params.namespace}/${params.name} (${params.target}): ${errorMessage}`);
       }
     }),
   );
@@ -169,5 +255,18 @@ export function textResult(result: string): {
         text: result,
       },
     ],
+  };
+}
+
+// Tools with an `outputSchema` must set `isError: true` on failure, since the SDK
+// skips structured-content validation only when `isError` is set. Tools without an
+// outputSchema can keep using `textResult`, but this is safe (and preferred) for both.
+export function errorResult(message: string): {
+  content: { type: "text"; text: string }[];
+  isError: true;
+} {
+  return {
+    content: [{ type: "text", text: message }],
+    isError: true,
   };
 }
