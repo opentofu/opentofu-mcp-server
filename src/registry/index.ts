@@ -46,27 +46,31 @@ export class RegistryClient {
     return (responseType === "json" ? response.json() : response.text()) as Promise<T>;
   }
 
-  private getLatestVersion(versions: apiDefinition["ProviderVersionDescriptor"][]): string | undefined {
+  /**
+   * Sorts versions (provider or module) newest-first using semver. Versions that
+   * cannot be parsed as semver are left in their original relative order, after
+   * any valid semver versions.
+   */
+  private sortVersionsDescending<T extends { id: string; published: string }>(versions: T[]): T[] {
     if (!versions || versions.length === 0) {
-      return undefined;
+      return [];
     }
 
-    const validVersions = versions
-      .map((v) => ({
-        original: v.id,
-        normalized: semver.valid(semver.coerce(v.id.replace(/^v/, ""))),
-      }))
-      .filter((v) => v.normalized !== null);
+    const withNormalized = versions.map((v) => ({
+      version: v,
+      normalized: semver.valid(semver.coerce(v.id.replace(/^v/, ""))),
+    }));
 
-    if (validVersions.length === 0) {
-      return versions[0].id;
-    }
+    const valid = withNormalized.filter((v) => v.normalized !== null);
+    const invalid = withNormalized.filter((v) => v.normalized === null);
 
-    validVersions.sort((a, b) => {
-      return semver.compare(b.normalized as string, a.normalized as string);
-    });
+    valid.sort((a, b) => semver.compare(b.normalized as string, a.normalized as string));
 
-    return validVersions[0].original;
+    return [...valid, ...invalid].map((v) => v.version);
+  }
+
+  private getLatestVersion(versions: apiDefinition["ProviderVersionDescriptor"][]): string | undefined {
+    return this.sortVersionsDescending(versions)[0]?.id;
   }
 
   private async getLatestProviderVersion(namespace: string, name: string): Promise<string | undefined> {
@@ -106,6 +110,17 @@ export class RegistryClient {
     return enhancedProvider;
   }
 
+  /**
+   * Returns just the available versions for a provider (id + published date),
+   * sorted newest-first. This performs a single, lightweight API call — unlike
+   * getProviderDetails, it does not fetch the full docs for the latest version.
+   */
+  async getProviderVersions(namespace: string, name: string): Promise<apiDefinition["ProviderVersionDescriptor"][]> {
+    const path = `/registry/docs/providers/${namespace}/${name}/index.json`;
+    const provider = await this.fetchFromApi<apiDefinition["Provider"]>(path);
+    return this.sortVersionsDescending(provider.versions);
+  }
+
   async getModuleList(): Promise<apiDefinition["ModuleList"]> {
     return await this.fetchFromApi<apiDefinition["ModuleList"]>("/registry/docs/modules/index.json");
   }
@@ -113,6 +128,19 @@ export class RegistryClient {
   async getModuleDetails(namespace: string, name: string, target: string): Promise<apiDefinition["Module"]> {
     const path = `/registry/docs/modules/${namespace}/${name}/${target}/index.json`;
     return await this.fetchFromApi<apiDefinition["Module"]>(path);
+  }
+
+  /**
+   * Returns just the available versions for a module (id + published date),
+   * sorted newest-first. Note: unlike getProviderVersions vs getProviderDetails,
+   * this isn't a lighter-weight call than getModuleDetails (both hit the same
+   * single, already-lightweight module endpoint) — this exists to mirror
+   * getProviderVersions and provide a dedicated, structured-output tool.
+   */
+  async getModuleVersions(namespace: string, name: string, target: string): Promise<apiDefinition["ModuleVersionDescriptor"][]> {
+    const path = `/registry/docs/modules/${namespace}/${name}/${target}/index.json`;
+    const module = await this.fetchFromApi<apiDefinition["Module"]>(path);
+    return this.sortVersionsDescending(module.versions);
   }
 
   async getResourceDocs(namespace: string, name: string, target: string, version?: string): Promise<string> {
