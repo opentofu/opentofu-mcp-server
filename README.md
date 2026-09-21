@@ -74,7 +74,7 @@ You do not need to define any inputs.
 You can also run the server locally with npx:
 
 ```bash
-npx @opentofu/opentofu-mcp-server
+npx --yes @opentofu/opentofu-mcp-server@1.0.1
 ```
 
 #### Global Installation
@@ -82,7 +82,7 @@ npx @opentofu/opentofu-mcp-server
 Install globally for repeated use:
 
 ```bash
-npm install -g @opentofu/opentofu-mcp-server
+npm install -g @opentofu/opentofu-mcp-server@1.0.1
 opentofu-mcp-server
 ```
 
@@ -91,7 +91,7 @@ opentofu-mcp-server
 Add the local server to Claude Code:
 
 ```bash
-claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server
+claude mcp add opentofu -- npx --yes @opentofu/opentofu-mcp-server@1.0.1
 ```
 
 #### Generic MCP Configuration (Local)
@@ -101,11 +101,14 @@ claude mcp add opentofu -- npx @opentofu/opentofu-mcp-server
   "mcpServers": {
     "opentofu": {
       "command": "npx",
-      "args": ["-y", "@opentofu/opentofu-mcp-server"]
+      "args": ["--yes", "@opentofu/opentofu-mcp-server@1.0.1"]
     }
   }
 }
 ```
+
+These commands intentionally pin version `1.0.1`. Review and explicitly replace the version when upgrading; unpinned `npx` and `npm install` examples are not recommended.
+
 
 ### Available Tools
 
